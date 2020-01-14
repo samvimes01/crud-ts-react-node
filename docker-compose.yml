@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  server:
+    build: ./server
+    container_name: crud-server
+    ports:
+      - 5000:5000
+      - 9229:9229
+    volumes:
+      - ./server:/server
+      - /server/node_modules
+    depends_on:
+        - db
+
+  client:
+    build: ./client
+    container_name: crud-client
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/client
+      - /client/node_modules
+    depends_on:
+      - server
+    restart: always
+
+  db:
+    image: mysql:5.7
+    container_name: crud-mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: crud
+      MYSQL_USER: crud
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
