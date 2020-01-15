@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import loggerMiddleware from './middleware/logger';
 import RootController from './controllers/root.controller';
+import AuthController from './controllers/api/v1/auth.controller';
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ const port = +process.env.SERVER_PORT! || 5000;
 
 const app = new App({
   port,
-  controllers: [new RootController()],
+  controllers: [new RootController(), new AuthController()],
   middleWares: [bodyParser.json(), bodyParser.urlencoded({ extended: true }), loggerMiddleware],
 });
 

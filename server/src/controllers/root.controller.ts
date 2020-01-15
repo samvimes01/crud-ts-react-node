@@ -10,7 +10,7 @@ class RootController implements BasicController {
   }
 
   public initRoutes(): void {
-    this.router.get('/', this.info);
+    this.router.get(this.path, this.info);
   }
 
   info = (req: Request, res: Response): void => {
