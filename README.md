@@ -19,3 +19,5 @@
 - In dev environment you can seed tables with `npm run seed`
 
 - Now you can access application at [http://localhost:3000](http://localhost:3000) (api is running at [http://localhost:5000](http://localhost:5000))
+
+### In the root folder you can find a Postman json collection to import and test. First Sign In (and retrieve jwt token, than use other endpoints)
