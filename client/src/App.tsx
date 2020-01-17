@@ -16,24 +16,26 @@ const App: React.FC = () => {
   return (
     <StoreProvider>
       <Router history={history}>
-        <div>
+        <div className="bg-light-green gray ">
           <NavigationBar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path={'/' + NonAuthRoutes.SIGNIN} component={SigninPage} />
-            <Route path={'/' + NonAuthRoutes.SIGNUP} component={SignupPage} />
-            <AuthRoute
-              path={'/' + WithAuthRoutes.PROFILE}
-              Component={Profile}
-              requiredRoles={[UserRoles.ADMIN, UserRoles.USER]}
-            />
-            <AuthRoute
-              path={'/' + WithAuthRoutes.DASHBOARD}
-              Component={DashboardPage}
-              requiredRoles={[UserRoles.ADMIN]}
-            />
-            <Route path={'/' + NonAuthRoutes.UNAUTHORIZED} component={Unauthorized} />
-          </Switch>
+          <div className="flex flex-column items-center-ns">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path={'/' + NonAuthRoutes.SIGNIN} component={SigninPage} />
+              <Route path={'/' + NonAuthRoutes.SIGNUP} component={SignupPage} />
+              <AuthRoute
+                path={'/' + WithAuthRoutes.PROFILE}
+                Component={Profile}
+                requiredRoles={[UserRoles.ADMIN, UserRoles.USER]}
+              />
+              <AuthRoute
+                path={'/' + WithAuthRoutes.DASHBOARD}
+                Component={DashboardPage}
+                requiredRoles={[UserRoles.ADMIN]}
+              />
+              <Route path={'/' + NonAuthRoutes.UNAUTHORIZED} component={Unauthorized} />
+            </Switch>
+          </div>
         </div>
       </Router>
     </StoreProvider>

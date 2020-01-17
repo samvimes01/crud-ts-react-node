@@ -32,30 +32,32 @@ const SignIn: FC = (): JSX.Element => {
         <i className="fas fa-user"></i> Sign in to your Account
       </p>
       <form
-        className="form"
-        onSubmit={(event: FormEvent<HTMLFormElement>): void => {
-          onSubmit(event);
-        }}
+        className="pa4 black-80"
+        onSubmit={(event: FormEvent<HTMLFormElement>): void => onSubmit(event)}
       >
-        <div className="form-group">
+        <div className="measure">
+          <label htmlFor="name" className="f6 b db mb2">Email Address</label>
           <input
             type="email"
+            className="input-reset ba b--black-20 pa2 mb2 db w-100"
             placeholder="Email Address"
             name="email"
             value={email}
             onChange={(event: ChangeEvent<HTMLInputElement>): void => onChange(event)}
           />
         </div>
-        <div className="form-group">
+        <div className="measure">
+          <label htmlFor="name" className="f6 b db mb2">Password</label>
           <input
             type="password"
+            className="input-reset ba b--black-20 pa2 mb2 db w-100"
             placeholder="Password"
             name="password"
             value={password}
             onChange={(event: ChangeEvent<HTMLInputElement>): void => onChange(event)}
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Sign in" />
+        <input type="submit" className="f6 link dim ba bw0 br3 ph3 pv2 mv2 dib white bg-dark-green" value="Sign in" />
       </form>
       <p className="my-1">
         Don't have an account? <Link to={NonAuthRoutes.SIGNUP}>Sign Up</Link>
