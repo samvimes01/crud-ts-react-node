@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import cors from 'cors';
 import BasicController from './interfaces/BasicController';
 class App {
   public app: Application;
@@ -7,6 +8,7 @@ class App {
   constructor(appInit: { port: number; middleWares: Function[]; controllers: BasicController[] }) {
     this.app = express();
     this.port = appInit.port;
+    this.app.use(cors({ origin: 'http://localhost:3000' }));
 
     this.middlewares(appInit.middleWares);
     this.routes(appInit.controllers);
