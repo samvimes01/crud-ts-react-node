@@ -1,21 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Router, Switch, Route } from 'react-router';
+import { createBrowserHistory } from 'history';
+
+import { NonAuthRoutes, WithAuthRoutes } from 'utils/Routes';
+import { Home, SigninPage, Profile, Unauthorized, DashboardPage, SignupPage } from 'pages/Pages';
+import AuthRoute from 'components/AuthRoute';
+import { StoreProvider } from 'contextStore/StoreProvider';
+import { UserRoles } from 'interfaces/UserRoles';
+import NavigationBar from 'components/NavigationBar';
 import './App.css';
+
+export const history = createBrowserHistory();
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StoreProvider>
+      <Router history={history}>
+        <div>
+          <NavigationBar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path={'/' + NonAuthRoutes.SIGNIN} component={SigninPage} />
+            <Route path={'/' + NonAuthRoutes.SIGNUP} component={SignupPage} />
+            <AuthRoute
+              path={'/' + WithAuthRoutes.PROFILE}
+              Component={Profile}
+              requiredRoles={[UserRoles.ADMIN, UserRoles.USER]}
+            />
+            <AuthRoute
+              path={'/' + WithAuthRoutes.DASHBOARD}
+              Component={DashboardPage}
+              requiredRoles={[UserRoles.ADMIN]}
+            />
+            <Route path={'/' + NonAuthRoutes.UNAUTHORIZED} component={Unauthorized} />
+          </Switch>
+        </div>
+      </Router>
+    </StoreProvider>
   );
-}
+};
 
 export default App;
